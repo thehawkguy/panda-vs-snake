@@ -1,20 +1,22 @@
-Bullet = Object:extend()
+require "entity"
+Bullet = Entity:extend()
 
-function Bullet:new(x, y, side)
-  self.image = love.graphics.newImage("bullet.png")
-  self.x = x
-  self.y = y  
+function Bullet:new(character)
+  self.image = Settings.BulletImage
+  self.character = character
+  self.x = character.x + character.xBullet
+  self.y = character.y + character.yBullet
   self.speed = 700
   self.width = self.image:getWidth()
   self.height = self.image:getHeight()
-  self.side = side
+  
+  widthBulletHalfed = self.width / 2
   
 end
 
 function Bullet:update(dt)
   
-  self.speed = 0
-  if self.side == "top" then
+  if self.character == player then
       self.y = self.y + self.speed * dt
     else
       self.y = self.y - self.speed * dt
@@ -40,9 +42,9 @@ function Bullet:checkCollision(obj)
   local obj_bottom = obj.y + obj.height
   
   if self_right > obj_left and
-  self_left < obj_right and
-  self_bottom > obj_top and
-  self_top < obj_bottom then
+    self_left < obj_right and
+    self_bottom > obj_top and
+    self_top < obj_bottom then
     
     self.dead = true    
     obj.health = obj.health -1

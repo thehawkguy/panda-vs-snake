@@ -7,7 +7,11 @@ function Enemy:new(x, y, speed, width, height, side, health, dead)
   self.width = self.image:getWidth()
   self.height= self.image:getHeight()
   self.side = "bottom"
-  xBulE = self.width / 2
-  yBulE = 8
+  self.xBullet = self.width / 2 + Settings.BulletHOffset
+  self.yBullet = - Settings.BulletHeight - 1
+  self.DrawFlipY = -1
+  self.DrawOffsetY = Settings.SnakeHeight
+  self.keyLeft = "left"
+  self.keyRight = "right"
+  self.keyFire = "up"
 end
-
