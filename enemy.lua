@@ -14,4 +14,5 @@ function Enemy:new(x, y, speed, width, height, side, health, dead)
   self.keyLeft = "left"
   self.keyRight = "right"
   self.keyFire = "up"
+  self.name = "Snake"
 end
