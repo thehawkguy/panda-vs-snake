@@ -1,4 +1,5 @@
 SettingsClass = Object:extend()
+require "stackholder"
 
 function SettingsClass:new()
 
@@ -23,6 +24,9 @@ function SettingsClass:new()
     self.healthbarWidth = 450
     self.xRand1 = 200
     self.xRand2 = 250
+    self.WinFont = love.graphics.newFont(24)
+    self.FontStack = FontStack()
+    self.ColorStack = ColorStack()
 
     oldWindowHeight = self.WindowHeight
     oldWindowWidth = self.WindowWidth
@@ -57,8 +61,20 @@ function SettingsClass:update()
 
         oldWindowWidth = self.WindowWidth
     end
+  end
 
+  function SettingsClass:pushfont(font)
+      self.FontStack:push(font)
+  end
 
-end
+  function SettingsClass:popfont()
+      self.FontStack:pop()
+  end
 
+  function SettingsClass:pushcolor(r, g, b, a)
+      self.ColorStack:push(r, g, b, a)
+  end
 
+  function SettingsClass:popcolor()
+      self.ColorStack:pop()
+  end

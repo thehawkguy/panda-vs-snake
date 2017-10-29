@@ -14,10 +14,17 @@ function love.load()
   require "bullet"
   require "healthbar"
   require "settings"
+<<<<<<< HEAD
   
   -- Wir möchten eine Pause-Funktion haben, primär für das "Game Over" - daher ein bool den wir eingangs auf true setzen
   gameRunning = true
   
+=======
+
+  -- Wir möchten eine Pause-Funktion haben, primär für das "Game Over" - daher ein bool den wir eingangs auf true setzen
+  gameRunning = true
+
+>>>>>>> c6419720be79b947b81f099c4f753450568ac4e5
   -- sämtliche entities (s. auch entity class) werden initialisiert
   player = Player(Settings.pandaX, 45, 500)
   enemy = Enemy(Settings.snakeX, 570, 500)
@@ -52,7 +59,7 @@ function love.update(dt)
     -- wir möchten, dass das Spiel endet, falls ein Player-Character stirbt (ogott die Nomenklatur gerade ist furchtbar...)
     if player.isDead or enemy.isDead then
       gameRunning = false
-    end    
+    end
   end
 end
 
@@ -64,28 +71,41 @@ function love.draw()
   player:draw()
   enemy:draw()
   healthbarsnake:draw()
-  healthbarpanda:draw()  
+  healthbarpanda:draw()
   for i,v in ipairs(listOfBullets) do
     v:draw(dt)
-  end  
-
-  for i,v in ipairs(listOfPowerUps) do
-    v:draw(dt)
   end
-  
+
   -- die Anleitungen zur Steuerung werden gezeichnet
   love.graphics.draw(Settings.manualImagePanda, Settings.manualX, 5)
   love.graphics.draw(Settings.manualImageSnake, Settings.manualX, Settings.healthbarSnakeY)
 
   -- bei gameover wird der Gewinner ausgerufen und erwähnt, wie man das Spiel neustartet
-  if gameRunning == false and player.isDead then
-    love.graphics.print("Gratz, the snake has won! Please press 'R' to restart.", 300, 350, 0, 2)
-  elseif gameRunning == false and enemy.isDead then
-    love.graphics.print("Gratz, the panda has won! Please press 'R' to restart.", 300, 350, 0, 2)
+  if gameRunning == false then
+    if  player.isDead then
+      paintWin(enemy)
+    else
+      paintWin(player)
+    end
   end
-
   -- hier unten drunter kommt alles, was nur zum Entwickeln praktisch ist.
   love.graphics.print(Settings.WindowWidth, 10, 50)
   love.graphics.print(Settings.WindowHeight, 10, 65)
-  
+
 end
+
+function paintWin (character)
+  Settings:pushfont(Settings.WinFont)
+    --local f = love.graphics.getFont()
+  -- love.graphics.setFont(Settings.WinFont)
+    love.graphics.printf("Gratz, the " .. character.name .." has won! Please press 'r' to restart.",Settings.WindowWidth/6, (Settings.WindowHeight/2)-10, (Settings.WindowWidth/3)*2, "center")
+    Settings:popfont()
+
+    --love.graphics.printf("this should be a different font.",Settings.WindowWidth/6, (Settings.WindowHeight/2)+ 100, (Settings.WindowWidth/3)*2, "center")
+   --love.graphics.setFont(f)
+end
+
+
+
+
+--workaround for linter
