@@ -29,6 +29,10 @@ function love.load()
 end
 
 function love.update(dt)
+
+  --local joysticks = love.joystick.getJoysticks()
+  --error(table.getn(joysticks))
+
   -- Settings machen nur Hintergrundsachen. Beispielsweise für die dynamische Auflösung, daher müssen sie immer updaten
   Settings:update()
 
