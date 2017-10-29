@@ -14,17 +14,10 @@ function love.load()
   require "bullet"
   require "healthbar"
   require "settings"
-<<<<<<< HEAD
   
   -- Wir möchten eine Pause-Funktion haben, primär für das "Game Over" - daher ein bool den wir eingangs auf true setzen
   gameRunning = true
   
-=======
-
-  -- Wir möchten eine Pause-Funktion haben, primär für das "Game Over" - daher ein bool den wir eingangs auf true setzen
-  gameRunning = true
-
->>>>>>> c6419720be79b947b81f099c4f753450568ac4e5
   -- sämtliche entities (s. auch entity class) werden initialisiert
   player = Player(Settings.pandaX, 45, 500)
   enemy = Enemy(Settings.snakeX, 570, 500)
