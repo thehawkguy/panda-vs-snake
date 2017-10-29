@@ -10,7 +10,8 @@ function HealthBar:new(y, character)
   end
 
 function HealthBar:draw()
-    local r, g, b, a = love.graphics.getColor()
+    -- local r, g, b, a = love.graphics.getColor()
+    Settings:pushcolor()
     local health = self.character.health
 
     local colorRed = 255 - health * 2.55
@@ -20,7 +21,7 @@ function HealthBar:draw()
     if (health <= 0) then
         borderR = 255
         borderG = 0
-        borderB = 0    
+        borderB = 0
     else
         love.graphics.setColor(colorRed, colorGreen, 0, 255)
         love.graphics.rectangle("fill", self.x + 1, self.y + 1, health * (Settings.healthbarWidth / 100), self.height - 2)
@@ -29,5 +30,6 @@ function HealthBar:draw()
     love.graphics.rectangle("line", self.x, self.y, Settings.healthbarWidth + 2, self.height)
 
     --love.graphics.rectangle("fill", 0, 0, 100, 100)
-    love.graphics.setColor(r, g, b, a)
+    -- love.graphics.setColor(r, g, b, a)
+    Settings:popcolor()
 end
