@@ -21,7 +21,8 @@ function SettingsClass:new()
     self.manualImagePanda = love.graphics.newImage("manualpanda.png")
     self.manualImageSnake = love.graphics.newImage("manualsnake.png")
     self.healthbarWidth = 450
-
+    self.xRand1 = 200
+    self.xRand2 = 250
 
     oldWindowHeight = self.WindowHeight
     oldWindowWidth = self.WindowWidth

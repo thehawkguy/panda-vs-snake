@@ -24,6 +24,7 @@ function love.load()
   healthbarpanda = HealthBar(5, player)
   healthbarsnake = HealthBar(Settings.healthbarSnakeY, enemy)
   listOfBullets = {}
+  listOfPowerUps = {}
 
 end
 
@@ -43,6 +44,10 @@ function love.update(dt)
       v:checkCollision(enemy)
       v:checkCollision(player)
     end
+
+    -- for i,v in ipairs(listOfPowerUps) do
+      -- v:update(dt)
+      -- v:checkCollision(Bullet)
     
     -- wir möchten, dass das Spiel endet, falls ein Player-Character stirbt (ogott die Nomenklatur gerade ist furchtbar...)
     if player.isDead or enemy.isDead then
@@ -63,6 +68,10 @@ function love.draw()
   for i,v in ipairs(listOfBullets) do
     v:draw(dt)
   end  
+
+  for i,v in ipairs(listOfPowerUps) do
+    v:draw(dt)
+  end
   
   -- die Anleitungen zur Steuerung werden gezeichnet
   love.graphics.draw(Settings.manualImagePanda, Settings.manualX, 5)
@@ -80,5 +89,3 @@ function love.draw()
   love.graphics.print(Settings.WindowHeight, 10, 65)
   
 end
-
-
