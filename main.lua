@@ -88,6 +88,7 @@ function love.draw()
   -- hier unten drunter kommt alles, was nur zum Entwickeln praktisch ist.
   love.graphics.print(Settings.WindowWidth, 10, 50)
   love.graphics.print(Settings.WindowHeight, 10, 65)
+  love.graphics.print(tostring(love.timer.getFPS()), 100, 200)
 
 end
 

@@ -31,7 +31,7 @@ function Character:update(dt)
 
   self.timeShot = self.timeShot + dt
 
-  if love.keyboard.isDown(self.keyFire) and self.timeShot >= 1 then
+  if love.keyboard.isDown(self.keyFire) and self.timeShot >= 0.5 then
     table.insert(listOfBullets, Bullet(self))
     self.timeShot = 0
   end
