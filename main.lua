@@ -21,14 +21,14 @@ function love.load()
   gameRunning = true
   
   -- sämtliche entities (s. auch entity class) werden initialisiert
-  player = Player(Settings.pandaX, 45, 500)
-  enemy = Enemy(Settings.snakeX, 570, 500)
+  player = Player(Settings.pandaX, 45, Settings.pandaSpeed)
+  enemy = Enemy(Settings.snakeX, 570, Settings.snakeSpeed)
   healthbarpanda = HealthBar(5, player)
   healthbarsnake = HealthBar(Settings.healthbarSnakeY, enemy)
   listOfBullets = {}
-  pUpTimer = Timer.new()
-  pUpIsDead = false
   listOfPUps = {}
+
+  timePUp = 0
 
 end
 
@@ -48,9 +48,12 @@ function love.update(dt)
       v:update(dt)
       v:checkCollision(enemy)
       v:checkCollision(player)
+      for j,k in ipairs(listOfPUps) do
+        v:checkCollisionPUp(listOfPUps[j])
+      end
     end
 
-    PowerUp:check()
+    PowerUp:update(dt)
 
     -- for i,v in ipairs(listOfPowerUps) do
       -- v:update(dt)
@@ -78,7 +81,7 @@ function love.draw()
   for i,v in ipairs(listOfPUps) do
     v:draw(dt)
   end
-  
+
   -- die Anleitungen zur Steuerung werden gezeichnet
   love.graphics.draw(Settings.manualImagePanda, Settings.manualX, 5)
   love.graphics.draw(Settings.manualImageSnake, Settings.manualX, Settings.healthbarSnakeY)

@@ -27,6 +27,13 @@ function SettingsClass:new()
     self.WinFont = love.graphics.newFont(24)
     self.FontStack = FontStack()
     self.ColorStack = ColorStack()
+    self.pUpImage = love.graphics.newImage("element_blue_polygon.png")
+    self.pUpHeight = self.pUpImage:getHeight()
+    self.pUpWidth = self.pUpImage:getWidth()
+    self.pandaSpeed = 500
+    self.snakeSpeed = 500
+    self.bulletSpeedPanda = 700
+    self.bulletSpeedSnake = 700
 
     oldWindowHeight = self.WindowHeight
     oldWindowWidth = self.WindowWidth

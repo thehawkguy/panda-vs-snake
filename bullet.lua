@@ -6,7 +6,6 @@ function Bullet:new(character)
   self.character = character
   self.x = character.x + character.xBullet
   self.y = character.y + character.yBullet
-  self.speed = 700
   self.width = self.image:getWidth()
   self.height = self.image:getHeight()
   
@@ -17,9 +16,9 @@ end
 function Bullet:update(dt)
   
   if self.character == player then
-      self.y = self.y + self.speed * dt
+      self.y = self.y + Settings.bulletSpeedPanda * dt
     else
-      self.y = self.y - self.speed * dt
+      self.y = self.y - Settings.bulletSpeedSnake * dt
   end
     
 end
@@ -50,5 +49,47 @@ function Bullet:checkCollision(obj)
     obj.health = obj.health -1
   end
 end
+
+function Bullet:checkCollisionPUp(obj)
+  local self_left = self.x
+  local self_right = self.x + self.width
+  local self_top = self.y
+  local self_bottom = self.y + self.height
+  
+  local obj_left = obj.x
+  local obj_right = obj.x + Settings.pUpWidth
+  local obj_top = obj.y
+  local obj_bottom = obj.y + Settings.pUpHeight
+
+  if self_right > obj_left and
+  self_left < obj_right and
+  self_bottom > obj_top and
+  self_top < obj_bottom then
+
+      if self.character == player and obj.k == 1 then
+        Settings.bulletSpeedPanda = Settings.bulletSpeedPanda + 100
+      elseif self.character == player  and obj.k == 2 then
+        player.health = player.health + 10
+      elseif self.character == player  and obj.k == 3 then
+        player.fireCap = player.fireCap - 0.1
+      elseif self.character == player  and obj.k == 4 then
+        player.speed = player.speed * 1.1
+      elseif self.character == enemy and obj.k == 1 then
+        Settings.bulletSpeedSnake = Settings.bulletSpeedSnake + 100
+      elseif self.character == enemy and obj.k == 2 then
+        enemy.health = enemy.health + 10
+      elseif self.character == enemy and obj.k == 3 then
+        enemy.fireCap = enemy.fireCap - 0.1
+      elseif self.character == enemy and obj.k == 4 then
+        enemy.speed = enemy.speed * 1.1
+      end
+
+      -- obj.isDead == true
+
+
+  end
+
+end
+
 
   

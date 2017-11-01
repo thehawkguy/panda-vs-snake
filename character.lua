@@ -11,6 +11,7 @@ function Character:new(x, y, speed, width, height, side, health, dead)
   self.health = 100
   self.isDead = false
   self.timeShot = 0
+  self.fireCap = 1
 end
 
 function Character:update(dt)
@@ -31,7 +32,7 @@ function Character:update(dt)
 
   self.timeShot = self.timeShot + dt
 
-  if love.keyboard.isDown(self.keyFire) and self.timeShot >= 0.5 then
+  if love.keyboard.isDown(self.keyFire) and self.timeShot >= self.fireCap then
     table.insert(listOfBullets, Bullet(self))
     self.timeShot = 0
   end
