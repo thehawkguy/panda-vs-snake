@@ -22,8 +22,8 @@ function SettingsClass:new()
     self.manualImagePanda = love.graphics.newImage("manualpanda.png")
     self.manualImageSnake = love.graphics.newImage("manualsnake.png")
     self.healthbarWidth = 450
-    self.xRand1 = 200
-    self.xRand2 = 250
+    self.xRand1 = 100
+    self.xRand2 = self.WindowWidth - 200
     self.WinFont = love.graphics.newFont(24)
     self.FontStack = FontStack()
     self.ColorStack = ColorStack()

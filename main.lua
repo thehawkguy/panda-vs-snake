@@ -7,6 +7,7 @@ debuggee.poll()
 
 function love.load()
   Object = require "classic"
+  Timer = require "hump.timer"
   require "hawkkeys"
   require "entity"
   require "player"
@@ -14,6 +15,7 @@ function love.load()
   require "bullet"
   require "healthbar"
   require "settings"
+  require "powerup"
   
   -- Wir möchten eine Pause-Funktion haben, primär für das "Game Over" - daher ein bool den wir eingangs auf true setzen
   gameRunning = true
@@ -24,14 +26,13 @@ function love.load()
   healthbarpanda = HealthBar(5, player)
   healthbarsnake = HealthBar(Settings.healthbarSnakeY, enemy)
   listOfBullets = {}
-  listOfPowerUps = {}
+  pUpTimer = Timer.new()
+  pUpIsDead = false
+  listOfPUps = {}
 
 end
 
 function love.update(dt)
-
-  --local joysticks = love.joystick.getJoysticks()
-  --error(table.getn(joysticks))
 
   -- Settings machen nur Hintergrundsachen. Beispielsweise für die dynamische Auflösung, daher müssen sie immer updaten
   Settings:update()
@@ -48,6 +49,8 @@ function love.update(dt)
       v:checkCollision(enemy)
       v:checkCollision(player)
     end
+
+    PowerUp:check()
 
     -- for i,v in ipairs(listOfPowerUps) do
       -- v:update(dt)
@@ -72,7 +75,10 @@ function love.draw()
   for i,v in ipairs(listOfBullets) do
     v:draw(dt)
   end
-
+  for i,v in ipairs(listOfPUps) do
+    v:draw(dt)
+  end
+  
   -- die Anleitungen zur Steuerung werden gezeichnet
   love.graphics.draw(Settings.manualImagePanda, Settings.manualX, 5)
   love.graphics.draw(Settings.manualImageSnake, Settings.manualX, Settings.healthbarSnakeY)
