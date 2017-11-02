@@ -9,25 +9,25 @@ function Bullet:new(character)
   self.width = self.image:getWidth()
   self.height = self.image:getHeight()
   self.isDead = false
-  
+
   widthBulletHalfed = self.width / 2
-  
+
 end
 
 function Bullet:update(dt)
-  
+
   if self.character == player then
       self.y = self.y + Settings.bulletSpeedPanda * dt
     else
       self.y = self.y - Settings.bulletSpeedSnake * dt
   end
-    
+
 end
 
 function Bullet:draw()
-   
+
   love.graphics.draw(self.image, self.x, self.y)
-  
+
 end
 
 function Bullet:checkCollision(obj)
@@ -35,18 +35,18 @@ function Bullet:checkCollision(obj)
   local self_right = self.x + self.width
   local self_top = self.y
   local self_bottom = self.y + self.height
-  
+
   local obj_left = obj.x
   local obj_right = obj.x + obj.width
   local obj_top = obj.y
   local obj_bottom = obj.y + obj.height
-  
+
   if self_right > obj_left and
     self_left < obj_right and
     self_bottom > obj_top and
     self_top < obj_bottom then
-    
-    self.isDead = true    
+
+    self.isDead = true
 
     obj.health = obj.health - 10
   end
@@ -57,7 +57,7 @@ function Bullet:checkCollisionPUp(obj)
   local self_right = self.x + self.width
   local self_top = self.y
   local self_bottom = self.y + self.height
-  
+
   local obj_left = obj.x
   local obj_right = obj.x + Settings.pUpWidth
   local obj_top = obj.y
@@ -91,6 +91,3 @@ function Bullet:checkCollisionPUp(obj)
   end
 
 end
-
-
-  

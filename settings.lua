@@ -13,7 +13,7 @@ function SettingsClass:new()
     self.SnakeWidth = self.SnakeImage:getWidth()
     self.PandaImage = love.graphics.newImage("panda.png")
     self.PandaHeight = self.PandaImage:getHeight()
-    self.PandaWidth = self.PandaImage:getWidth()   
+    self.PandaWidth = self.PandaImage:getWidth()
     self.pandaX = (self.WindowWidth / 2) - (self.PandaWidth / 2)
     self.snakeX = (self.WindowWidth / 2) - (self.SnakeWidth / 2)
     self.snakeY = self.WindowHeight - self.SnakeHeight - 45
@@ -47,19 +47,19 @@ Settings = SettingsClass()
 function SettingsClass:update()
     self.WindowWidth, self.WindowHeight = love.graphics.getDimensions()
 
-    if oldWindowHeight ~= self.WindowHeight then   
+    if oldWindowHeight ~= self.WindowHeight then
         self.snakeY = self.WindowHeight - self.SnakeHeight - 45
         self.healthbarSnakeY = self.WindowHeight - 40
         enemy.y = self.snakeY
         healthbarsnake.y = self.healthbarSnakeY
 
-        oldWindowHeight = self.WindowHeight   
+        oldWindowHeight = self.WindowHeight
     end
 
-    if oldWindowWidth ~= self.WindowWidth then  
+    if oldWindowWidth ~= self.WindowWidth then
 
-        ratio = self.WindowWidth / oldWindowWidth 
-    
+        ratio = self.WindowWidth / oldWindowWidth
+
         enemy.x = enemy.x * ratio
         player.x = player.x * ratio
         self.manualX = self.manualX * ratio

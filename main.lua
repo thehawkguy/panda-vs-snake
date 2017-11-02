@@ -7,7 +7,6 @@ debuggee.poll()
 
 function love.load()
   Object = require "classic"
-  Timer = require "hump.timer"
   require "hawkkeys"
   require "entity"
   require "player"
@@ -16,10 +15,9 @@ function love.load()
   require "healthbar"
   require "settings"
   require "powerup"
-  
-  -- Wir möchten eine Pause-Funktion haben, primär für das "Game Over" - daher ein bool den wir eingangs auf true setzen
+  -- Wir möchten eine Pause-Funktion haben, primär für das "Game Over"
+  -- daher ein bool den wir eingangs auf true setzen
   gameRunning = true
-  
   -- sämtliche entities (s. auch entity class) werden initialisiert
   player = Player(Settings.pandaX, 45, Settings.pandaSpeed)
   enemy = Enemy(Settings.snakeX, 570, Settings.snakeSpeed)
@@ -34,7 +32,7 @@ end
 
 function love.update(dt)
 
-  -- Settings machen nur Hintergrundsachen. Beispielsweise für die dynamische Auflösung, daher müssen sie immer updaten
+  -- Settings machen nur Hintergrundsachen. Beispielsweise für die Platzierung, daher müssen sie immer updaten
   Settings:update()
 
   -- der Rest soll pausiert werden,sobald gameover ist, daher hier die if-Schleife, die den bool checkt
@@ -42,7 +40,6 @@ function love.update(dt)
     -- die beiden Charaktere: die Schlange (enemy) und der Panda (player) werden geupdated
     player:update(dt)
     enemy:update(dt)
-     
     -- die bullets werden geupdated und nach Kollisionen gecheckt
     for i,v in ipairs(listOfBullets) do
       v:update(dt)
@@ -65,8 +62,7 @@ function love.update(dt)
     end
 
     PowerUp:update(dt)
-    
-    -- wir möchten, dass das Spiel endet, falls ein Player-Character stirbt (ogott die Nomenklatur gerade ist furchtbar...)
+    -- wir möchten, dass das Spiel endet, falls ein Player-Character stirbt
     if player.isDead or enemy.isDead then
       gameRunning = false
     end
@@ -76,7 +72,6 @@ end
 function love.draw()
 
   debuggee.poll()
-  
   -- die entities werden gezeichnet
   player:draw()
   enemy:draw()
@@ -107,10 +102,11 @@ function love.draw()
   love.graphics.print(tostring(love.timer.getFPS()), 100, 200)
 
   --entwicklerzeugs
+  --panda
   love.graphics.print("Panda movement speed is " .. tostring(player.speed), 10, 240)
   love.graphics.print("Panda bullet speed is " .. tostring(Settings.bulletSpeedPanda), 10, 260)
   love.graphics.print("Panda fire rate cap is " .. tostring(player.fireCap), 10, 280)
-  
+  --snake
   love.graphics.print("Snake movement speed is " .. tostring(enemy.speed), 10, 300)
   love.graphics.print("Snake bullet speed is " .. tostring(Settings.bulletSpeedSnake), 10, 320)
   love.graphics.print("Snake fire rate cap is " .. tostring(enemy.fireCap), 10, 340)
@@ -120,12 +116,8 @@ end
 function paintWin (character)
   Settings:pushfont(Settings.WinFont)
 
-    love.graphics.printf("Gratz, the " .. character.name .." has won! Please press 'r' to restart.",Settings.WindowWidth/6, (Settings.WindowHeight/2)-10, (Settings.WindowWidth/3)*2, "center")
-    Settings:popfont()
+  love.graphics.printf("Gratz, the " .. character.name .." has won! Please press 'r' to restart.",Settings.WindowWidth/6, (Settings.WindowHeight/2)-10, (Settings.WindowWidth/3)*2, "center")
+  Settings:popfont()
 
-  end
-
-
-
-
+end
 --workaround for linter

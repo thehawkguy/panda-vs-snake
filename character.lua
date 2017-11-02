@@ -1,7 +1,7 @@
 require "entity"
 Character = Entity:extend()
 
-function Character:new(x, y, speed, width, height, side, health, dead)
+function Character:new(x, y, speed, width, height, side)
   self.x = x
   self.y = y
   self.speed = speed
@@ -42,8 +42,8 @@ function Character:update(dt)
   end
 
   if self.health > 100 then
-    self.health = 100 
-  end 
+    self.health = 100
+  end
 
 end
 
