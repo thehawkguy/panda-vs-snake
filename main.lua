@@ -48,16 +48,23 @@ function love.update(dt)
       v:update(dt)
       v:checkCollision(enemy)
       v:checkCollision(player)
+
       for j,k in ipairs(listOfPUps) do
         v:checkCollisionPUp(listOfPUps[j])
+
+        if k.isDead then
+          table.remove(listOfPUps, j)
+        end
+
       end
+
+      if v.isDead then
+        table.remove(listOfBullets, i)
+      end
+
     end
 
     PowerUp:update(dt)
-
-    -- for i,v in ipairs(listOfPowerUps) do
-      -- v:update(dt)
-      -- v:checkCollision(Bullet)
     
     -- wir möchten, dass das Spiel endet, falls ein Player-Character stirbt (ogott die Nomenklatur gerade ist furchtbar...)
     if player.isDead or enemy.isDead then
@@ -99,18 +106,24 @@ function love.draw()
   love.graphics.print(Settings.WindowHeight, 10, 65)
   love.graphics.print(tostring(love.timer.getFPS()), 100, 200)
 
+  --entwicklerzeugs
+  love.graphics.print("Panda movement speed is " .. tostring(player.speed), 10, 240)
+  love.graphics.print("Panda bullet speed is " .. tostring(Settings.bulletSpeedPanda), 10, 260)
+  love.graphics.print("Panda fire rate cap is " .. tostring(player.fireCap), 10, 280)
+  
+  love.graphics.print("Snake movement speed is " .. tostring(enemy.speed), 10, 300)
+  love.graphics.print("Snake bullet speed is " .. tostring(Settings.bulletSpeedSnake), 10, 320)
+  love.graphics.print("Snake fire rate cap is " .. tostring(enemy.fireCap), 10, 340)
+
 end
 
 function paintWin (character)
   Settings:pushfont(Settings.WinFont)
-    --local f = love.graphics.getFont()
-  -- love.graphics.setFont(Settings.WinFont)
+
     love.graphics.printf("Gratz, the " .. character.name .." has won! Please press 'r' to restart.",Settings.WindowWidth/6, (Settings.WindowHeight/2)-10, (Settings.WindowWidth/3)*2, "center")
     Settings:popfont()
 
-    --love.graphics.printf("this should be a different font.",Settings.WindowWidth/6, (Settings.WindowHeight/2)+ 100, (Settings.WindowWidth/3)*2, "center")
-   --love.graphics.setFont(f)
-end
+  end
 
 
 

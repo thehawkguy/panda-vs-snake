@@ -8,6 +8,7 @@ function Bullet:new(character)
   self.y = character.y + character.yBullet
   self.width = self.image:getWidth()
   self.height = self.image:getHeight()
+  self.isDead = false
   
   widthBulletHalfed = self.width / 2
   
@@ -45,8 +46,9 @@ function Bullet:checkCollision(obj)
     self_bottom > obj_top and
     self_top < obj_bottom then
     
-    self.dead = true    
-    obj.health = obj.health -1
+    self.isDead = true    
+
+    obj.health = obj.health - 10
   end
 end
 
@@ -67,25 +69,24 @@ function Bullet:checkCollisionPUp(obj)
   self_top < obj_bottom then
 
       if self.character == player and obj.k == 1 then
-        Settings.bulletSpeedPanda = Settings.bulletSpeedPanda + 100
+        Settings.bulletSpeedPanda = Settings.bulletSpeedPanda * 1.33
       elseif self.character == player  and obj.k == 2 then
-        player.health = player.health + 10
+        player.health = player.health + math.random(8, 18)
       elseif self.character == player  and obj.k == 3 then
-        player.fireCap = player.fireCap - 0.1
+        player.fireCap = player.fireCap - 0.2
       elseif self.character == player  and obj.k == 4 then
-        player.speed = player.speed * 1.1
+        player.speed = player.speed * 1.33
       elseif self.character == enemy and obj.k == 1 then
-        Settings.bulletSpeedSnake = Settings.bulletSpeedSnake + 100
+        Settings.bulletSpeedSnake = Settings.bulletSpeedSnake * 1.33
       elseif self.character == enemy and obj.k == 2 then
-        enemy.health = enemy.health + 10
+        enemy.health = enemy.health + math.random(8, 18)
       elseif self.character == enemy and obj.k == 3 then
-        enemy.fireCap = enemy.fireCap - 0.1
+        enemy.fireCap = enemy.fireCap - 0.2
       elseif self.character == enemy and obj.k == 4 then
-        enemy.speed = enemy.speed * 1.1
+        enemy.speed = enemy.speed * 1.33
       end
 
-      -- obj.isDead == true
-
+      obj.isDead = true
 
   end
 

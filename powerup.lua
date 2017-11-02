@@ -7,7 +7,7 @@ function PowerUp:new(x, y)
     self.y = (Settings.WindowHeight / 2) - (Settings.pUpHeight / 2)
     self.image = love.graphics.newImage(imagePowerUp)
     self.k = k
-    self.isDead = true
+    self.isDead = false
 
 end
 
@@ -26,13 +26,6 @@ function PowerUp:draw( ... )
 
     love.graphics.draw(self.image, self.x, self.y)
 
-    --entwicklerzeugs
-    love.graphics.print(tostring(self.k), 10, 200)
-    love.graphics.print(tostring(Settings.pUpHeight), 10, 230)
-    love.graphics.print(tostring(player.speed), 10, 260)
-    love.graphics.print(tostring(enemy.speed), 10, 290)
-    love.graphics.print(tostring(Settings.bulletSpeedPanda), 10, 310)
-    love.graphics.print(tostring(Settings.bulletSpeedSnake), 10, 330)
 end
 
 function PowerUp:random()

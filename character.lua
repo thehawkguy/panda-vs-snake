@@ -41,6 +41,10 @@ function Character:update(dt)
     self.isDead = true
   end
 
+  if self.health > 100 then
+    self.health = 100 
+  end 
+
 end
 
 function Character:draw()
