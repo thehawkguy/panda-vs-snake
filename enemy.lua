@@ -1,7 +1,7 @@
 require "character"
 Enemy = Character:extend()
 
-function Enemy:new(x, y, speed, width, joystick)
+function Enemy:new(x, y, speed, joystick)
   Enemy.super.new(self, x, y, speed, width, health)
   self.image = love.graphics.newImage("snake.png")
   self.width = self.image:getWidth()
