@@ -24,7 +24,8 @@ function HealthBar:draw()
         borderB = 0
     else
         love.graphics.setColor(colorRed, colorGreen, 0, 255)
-        love.graphics.rectangle("fill", self.x + 1, self.y + 1, health * (Settings.healthbarWidth / 100), self.height - 2)
+        love.graphics.rectangle("fill", self.x + 1, self.y + 1, health * (Settings.healthbarWidth / 100),
+        self.height - 2)
     end
     love.graphics.setColor(borderR, borderG, borderB, 255)
     love.graphics.rectangle("line", self.x, self.y, Settings.healthbarWidth + 2, self.height)

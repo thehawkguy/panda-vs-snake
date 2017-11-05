@@ -52,7 +52,7 @@ function Bullet:checkCollision(obj)
 
     self.isDead = true
 
-    obj.health = obj.health - 10
+    obj.health = obj.health - math.random(obj.damage - 2, obj.damage + 2)
   end
 end
 
@@ -74,33 +74,54 @@ function Bullet:checkCollisionPUp(obj)
     -- wenn die bullets zum panda gehören, dann:
     -- wenn sie ein bulletspeed Up treffen
     if self.character == player and obj.k == 1 then
-      player.bulletSpeed = player.bulletSpeed * 1.33
+      if player.bulletSpeed < 1300 then
+        player.bulletSpeed = player.bulletSpeed * 1.33
+      end
+
     -- wenn sie ein health Up treffen
-    elseif self.character == player  and obj.k == 2 and player.health <= 80 then
-      player.health = player.health + math.random(8, 18)
+    elseif self.character == player  and obj.k == 2 then
+      if player.health <= 100 - obj.healAmount then
+        player.health = player.health + obj.healAmount
+      else player.health = 100
+      end
+
     -- wenn sie ein firerate up treffen
     elseif self.character == player  and obj.k == 3 then
-      if player.fireCap > 0.2 then
+      if player.fireCap > 0.3 then
         player.fireCap = player.fireCap - 0.2
       end
+
     -- wenn sie ein speed Up treffen
     elseif self.character == player  and obj.k == 4 then
-      player.speed = player.speed * 1.33
+      if player.speed < 1200 then
+        player.speed = player.speed * 1.33
+      end
+
     -- wenn die bullets zur schlange gehören, dann:
-    -- etc.
+    -- wenn sie ein bulletspeed up treffen
     elseif self.character == enemy and obj.k == 1 then
-      enemy.bulletSpeed = enemy.bulletSpeed * 1.33
+      if enemy.bulletSpeed < 1300 then
+        enemy.bulletSpeed = enemy.bulletSpeed * 1.33
+      end
 
-    elseif self.character == enemy and obj.k == 2 and enemy.health <= 80 then
-      enemy.health = enemy.health + math.random(8, 18)
+    -- wenn sie ein health up treffen
+    elseif self.character == enemy and obj.k == 2 then
+      if enemy.health <= 100 - obj.healAmount then
+        enemy.health = enemy.health + obj.healAmount
+      else enemy.health = 100
+      end
 
+    -- wenn sie ein firerate up treffen
     elseif self.character == enemy and obj.k == 3 then
-      if enemy.fireCap > 0.2 then
+      if enemy.fireCap > 0.3 then
         enemy.fireCap = enemy.fireCap - 0.2
       end
 
+    -- wenn sie ein speed Up treffen
     elseif self.character == enemy and obj.k == 4 then
-      enemy.speed = enemy.speed * 1.33
+      if enemy.speed < 1200 then
+        enemy.speed = enemy.speed * 1.33
+      end
     end
 
     obj.isDead = true

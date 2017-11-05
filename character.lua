@@ -13,13 +13,30 @@ function Character:new(x, y, speed, width, height, side)
   self.timeShot = 0
   self.fireCap = 1
   self.bulletSpeed = 700
+  self.damage = 10
 end
 
 function Character:update(dt)
 
+  if self.joystick then
+
+    if self.joystick:getGamepadAxis("leftx") < 0 then
+      self.x = self.x - self.speed * dt
+    elseif self.joystick:getGamepadAxis("leftx") > 0 then
+      self.x = self.x + self.speed * dt
+    end
+
+    if self.joystick:isGamepadDown("a") and self.timeShot >= self.fireCap then
+      table.insert(listOfBullets, Bullet(self))
+      self.timeShot = 0
+    end
+
+  end
+
   if love.keyboard.isDown(self.keyLeft) then
     self.x = self.x - self.speed * dt
-  elseif love.keyboard.isDown(self.keyRight) then
+  end
+  if love.keyboard.isDown(self.keyRight) then
     self.x = self.x + self.speed * dt
   end
 

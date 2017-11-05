@@ -7,6 +7,7 @@ function PowerUp:new()
     self.x = math.random(Settings.xRand1, Settings.xRand2)
     self.y = (Settings.WindowHeight / 2) - (Settings.pUpHeight / 2)
     self.k = math.random(4)
+    self.healAmount = math.random(8, 18)
 
     if self.k == 1 then
         imagePowerUp = "element_blue_polygon.png"

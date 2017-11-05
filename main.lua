@@ -19,14 +19,19 @@ function love.load()
   -- daher ein bool den wir eingangs auf true setzen
   gameRunning = true
   -- sämtliche entities (s. auch entity class) werden initialisiert
-  player = Player(Settings.pandaX, 45, Settings.pandaSpeed)
-  enemy = Enemy(Settings.snakeX, 570, Settings.snakeSpeed)
+  local joysticks = love.joystick.getJoysticks()
+  player = Player(Settings.pandaX, 45, Settings.pandaSpeed,joysticks[1])
+  enemy = Enemy(Settings.snakeX, 570, Settings.snakeSpeed, joysticks[2])
   healthbarpanda = HealthBar(5, player)
   healthbarsnake = HealthBar(Settings.healthbarSnakeY, enemy)
   listOfBullets = {}
   listOfPUps = {}
+  joystickPanda = joysticks[1]
+  joystickSnake = joysticks[2]
+
 
   timePUp = 0
+
 
 end
 

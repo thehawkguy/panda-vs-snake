@@ -46,25 +46,41 @@ function SettingsClass:update()
     self.WindowWidth, self.WindowHeight = love.graphics.getDimensions()
 
     if oldWindowHeight ~= self.WindowHeight then
+
+        ratioY = self.WindowHeight / oldWindowHeight
+
         self.snakeY = self.WindowHeight - self.SnakeHeight - 45
         self.healthbarSnakeY = self.WindowHeight - 40
         enemy.y = self.snakeY
         healthbarsnake.y = self.healthbarSnakeY
+
+        for i,v in ipairs(listOfPUps) do
+            v.y = v.y * ratioY
+        end
 
         oldWindowHeight = self.WindowHeight
     end
 
     if oldWindowWidth ~= self.WindowWidth then
 
-        ratio = self.WindowWidth / oldWindowWidth
+        ratioX = self.WindowWidth / oldWindowWidth
 
-        enemy.x = enemy.x * ratio
-        player.x = player.x * ratio
-        self.manualX = self.manualX * ratio
+        enemy.x = enemy.x * ratioX
+        player.x = player.x * ratioX
+        self.manualX = self.manualX * ratioX
 
-        self.healthbarWidth = self.healthbarWidth * ratio
+        self.healthbarWidth = self.healthbarWidth * ratioX
+
+        for i,v in ipairs(listOfPUps) do
+            v.x = v.x * ratioX
+        end
+
+        for i,v in ipairs(listOfBullets) do
+            v.x = v.x * ratioX
+        end
 
         oldWindowWidth = self.WindowWidth
+
     end
   end
 
