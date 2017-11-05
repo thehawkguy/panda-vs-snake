@@ -32,8 +32,6 @@ function SettingsClass:new()
     self.pUpWidth = self.pUpImage:getWidth()
     self.pandaSpeed = 500
     self.snakeSpeed = 500
-    self.bulletSpeedPanda = 700
-    self.bulletSpeedSnake = 700
 
     oldWindowHeight = self.WindowHeight
     oldWindowWidth = self.WindowWidth

@@ -104,19 +104,22 @@ function love.draw()
   --entwicklerzeugs
   --panda
   love.graphics.print("Panda movement speed is " .. tostring(player.speed), 10, 240)
-  love.graphics.print("Panda bullet speed is " .. tostring(Settings.bulletSpeedPanda), 10, 260)
+  love.graphics.print("Panda bullet speed is " .. tostring(player.bulletSpeed), 10, 260)
   love.graphics.print("Panda fire rate cap is " .. tostring(player.fireCap), 10, 280)
   --snake
   love.graphics.print("Snake movement speed is " .. tostring(enemy.speed), 10, 300)
-  love.graphics.print("Snake bullet speed is " .. tostring(Settings.bulletSpeedSnake), 10, 320)
+  love.graphics.print("Snake bullet speed is " .. tostring(enemy.bulletSpeed), 10, 320)
   love.graphics.print("Snake fire rate cap is " .. tostring(enemy.fireCap), 10, 340)
 
 end
 
 function paintWin (character)
+
   Settings:pushfont(Settings.WinFont)
 
-  love.graphics.printf("Gratz, the " .. character.name .." has won! Please press 'r' to restart.",Settings.WindowWidth/6, (Settings.WindowHeight/2)-10, (Settings.WindowWidth/3)*2, "center")
+  love.graphics.printf("Gratz, the " .. character.name .." has won! Please press 'r' to restart.",
+  Settings.WindowWidth/6, (Settings.WindowHeight/2)-10, (Settings.WindowWidth/3)*2, "center")
+
   Settings:popfont()
 
 end

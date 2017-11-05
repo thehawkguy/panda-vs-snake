@@ -12,6 +12,7 @@ function Character:new(x, y, speed, width, height, side)
   self.isDead = false
   self.timeShot = 0
   self.fireCap = 1
+  self.bulletSpeed = 700
 end
 
 function Character:update(dt)
@@ -39,10 +40,6 @@ function Character:update(dt)
 
   if self.health <= 0 then
     self.isDead = true
-  end
-
-  if self.health > 100 then
-    self.health = 100
   end
 
 end

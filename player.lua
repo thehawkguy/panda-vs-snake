@@ -3,7 +3,7 @@ require "settings"
 require "character"
 Player = Character:extend()
 
-function Player:new(x, y, speed, width, height, side, health, dead)
+function Player:new(x, y, speed)
   Player.super.new(self, x, y, speed, health)
   self.image = love.graphics.newImage("panda.png")
   self.width = self.image:getWidth()
@@ -16,5 +16,4 @@ function Player:new(x, y, speed, width, height, side, health, dead)
   self.keyRight = "d"
   self.keyFire = "space"
   self.name = "Panda"
-
 end
