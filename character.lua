@@ -20,9 +20,9 @@ function Character:update(dt)
 
   if self.joystick then
 
-    if self.joystick:getGamepadAxis("leftx") < 0 then
+    if self.joystick:getGamepadAxis("leftx") < -0.1 then
       self.x = self.x - self.speed * dt
-    elseif self.joystick:getGamepadAxis("leftx") > 0 then
+    elseif self.joystick:getGamepadAxis("leftx") > 0.1 then
       self.x = self.x + self.speed * dt
     end
 
